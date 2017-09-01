@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 
 import { connect } from 'react-redux';
-import { updateRecommendedRent, updateDesiredRent } from '../../ducks/reducer';
+import { updateDesiredRent, updateWizard } from '../../ducks/reducer';
 
 class StepFive extends Component {
     render(){
-        const { updateRecommendedRent, updateDesiredRent } = this.props;
+        const { updateDesiredRent, recommendedRent, updateWizard } = this.props;
 
         return(
             <div className="step_container">
@@ -20,7 +20,7 @@ class StepFive extends Component {
                     <input placeholder="desiredRent" type="text" onChange={ ( e ) => updateDesiredRent( e.target.value ) } />   
                 </div>
             <Link to="/StepFour"><button className="/StepFive"> Previous Step </button></Link>
-            <Link to="/Complete"><button className="/StepFive"> Complete </button></Link>
+            <Link to="/"><button className="complete" onClick={() => console.log(this.props) }> Complete </button></Link>
         </div>
       </div>
         )
@@ -28,15 +28,11 @@ class StepFive extends Component {
 }
 
 function mapStateToProps(state) {
-    const { updateRecommendedRent, updateDesiredRent } = state;
 
-    return{
-        recommendedRent,
-        desiredRent
-    };
+return state;
 }
 
-export default connect (mapStateToProps, { updateRecommendedRent, updateDesiredRent }) (StepFive); 
+export default connect (mapStateToProps, { updateDesiredRent, updateWizard }) (StepFive); 
 
 
 
@@ -44,4 +40,3 @@ export default connect (mapStateToProps, { updateRecommendedRent, updateDesiredR
 
 
 
-export default connect (mapStateToProps, { updateRecommendedRent, updateDesiredRent }) (StepFive); 

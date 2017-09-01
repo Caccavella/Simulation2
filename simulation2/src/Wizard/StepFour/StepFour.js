@@ -27,7 +27,7 @@ class StepFour extends Component {
     }
 }
 function mapStateToProps(state) {
-    const { updateLoanAmount, updateMonthlyMortgage } = state;
+    const { loanAmount, monthlyMortgage } = state;
 
     return{
         loanAmount,

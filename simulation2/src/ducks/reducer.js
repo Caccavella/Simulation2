@@ -1,3 +1,7 @@
+import axios from 'axios';
+
+let url = 'http://localhost:3000'
+
 const wizardState = {
     userid: '',
     propertyName: '',
@@ -19,12 +23,12 @@ const wizardState = {
 }
 
 const UPDATE_PROPERTY_NAME = 'UPDATE_PROPERTY_NAME';
-const UPDATE_PROPERTY_DESCRIPTION = "UPDATE_PREOPERTY_DESCRIPTION";
+const UPDATE_PROPERTY_DESCRIPTION = "UPDATE_PROPERTY_DESCRIPTION";
 const UPDATE_PROP_ADDRESS = "UPDATE_PROP_ADDRESS";
 const UPDATE_PROP_CITY = "UPDATE_PROP_CITY";
 const UPDATE_PROP_STATE = "UPDATE_PROP_STATE";
 const UPDATE_PROP_ZIP = "UPDATE_PROP_ZIP";
-const UDPATE_IMAGEURL = "UDPATE_IMAGEURL";
+const UPDATE_IMAGEURL = "UPDATE_IMAGEURL";
 const UPDATE_LOAN_AMOUNT = "UPDATE_LOAN_AMOUNT";
 const UPDATE_MONTHLY_MORTGAGE = "UPDATE_MONTHLY_MORTGAGE";
 const UPDATE_DESIRED_RENT = "UPDATE_DESIRED_RENT";
@@ -40,6 +44,7 @@ const CREATE_NEW_PROPERTY = "CREATE_NEW_PROPERTY";
 const FILTER_PROPERTIES = "FILTER_PROPERTIES";
 const PUSH_WIZARD_COMPONENT = "PUSH_WIZARD_COMPONENT";
 const RESET_WIZARD_STATUS = "RESET_WIZARD_STATUS";
+const DELETE_PROPERTY = 'DELETE_PROPERTY';
 
 function reducer(state = wizardState, action) {
     switch (action.type) {
@@ -53,7 +58,7 @@ function reducer(state = wizardState, action) {
         case LOGOUT_USER:
             return Object.assign({}, wizardState)
         //Wizard Cases
-            case UDPATE_USERID:
+        case UPDATE_USERID:
             return Object.assign({}, state, { userid: action.payload })
         case UPDATE_PROPERTY_NAME:
             return Object.assign({}, state, { propertyName: action.payload })
@@ -81,13 +86,13 @@ function reducer(state = wizardState, action) {
         case GET_ALL_PROPERTIES:
             return Object.assign({}, state, {properties: action.payload})
         case DELETE_PROPERTY:
-            return Object.assign({}, state, { properties: payload });
+            return Object.assign({}, state, { properties: state.properties.splice(state.properties.indexOf(action.payload, 1)) });
         case FILTER_PROPERTIES:
-            return Object.assign({}, state, { properties: payload });    
+            return Object.assign({}, state, { properties: action.payload });    
         case PUSH_WIZARD_COMPONENT: {
             let newState = Object.assign({}, state);
-            for( var i in payload ) {
-                newState.wizardState[i] = payload[i];
+            for( var i in action.payload ) {
+                newState.wizardState[i] = action.payload[i];
             }
             return newState;
         }
@@ -103,10 +108,18 @@ function reducer(state = wizardState, action) {
       default: return state;  
     }
 }
+// export function filterProperties(num) {
+//     if(properties.desiredRent < num) {
+//         return properties.map(c, i)
+//     }
+// }
 
-export function updateLoginStatus(loginStatus) {
-    if (username === 'username' && password === 'password')
-    loginStatus = true;
+export function updateLoginStatus(username, password) {
+    let loginStatus = false;
+    
+    if (username === 'username' && password === 'password') {
+        loginStatus = true;        
+    }
     return {
         type: UPDATE_LOGIN_STATUS,
         payload: loginStatus
@@ -196,11 +209,14 @@ export function updateDesiredRent(desiredRent) {
         payload: desiredRent
     }
 }
-export function updateWizard( obj ) {
-    return {
-      type: PUSH_WIZARD_COMPONENT,
-      payload: obj
-    };
+export function updateWizard(obj ) {
+    
+ const promise = axios.post(url+'/api/properties').then(response => {
+
+ })   
+    // return {
+    //     type: 
+    // }
   }
   
   export function resetWizard() {

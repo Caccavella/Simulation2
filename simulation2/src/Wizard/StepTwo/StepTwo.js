@@ -13,23 +13,23 @@ class StepTwo extends Component {
                 <p> Step 2</p>
             <div className="step2_address_container">
                 <span>Address</span>
-                <input placeholder="address" type="text" onChange={ ( e ) => updateAddress( e.target.value ) } />
+                <input placeholder="address" type="text" onChange={ ( e ) => updatePropAddress( e.target.value ) } />
             </div>
             
             <div className="step2_middle_container">
                 <div className="step2_city">
                     <span>City</span>
-                    <input placeholder="City" type="text" onChange={ ( e ) => updateCity( e.target.value ) } />   
+                    <input placeholder="City" type="text" onChange={ ( e ) => updatePropCity( e.target.value ) } />   
                 </div>
                 <div className="step2_state">
                     <span>State</span>
-                    <input placeholder="State" type="text" onChange={ ( e ) => updateState( e.target.value ) } /> 
+                    <input placeholder="State" type="text" onChange={ ( e ) => updatePropState( e.target.value ) } /> 
                 </div> 
             </div>
 
             <div className="step2_zip_container">
                 <span>Zip</span>
-                <input placeholder="Zip" type="text" onChange={ ( e ) => updateZip( e.target.value ) } />
+                <input placeholder="Zip" type="text" onChange={ ( e ) => updatePropZip( e.target.value ) } />
  
         <Link to="/StepOne"><button className="/StepTwo"> Previous Step </button></Link>
         <Link to="/StepThree"><button className="/StepTwo"> Next Step </button></Link>
@@ -41,8 +41,8 @@ class StepTwo extends Component {
     }
 }
 
-function mapStateToProps(state) {
-    const { address, city, state, zip } = state;
+function mapStateToProps(st) {
+    const { address, city, state, zip } = st;
 
     return{
         address,

@@ -3,7 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const massive = require('massive');
-const connectionString = `postgres://postgres:${process.env.PASSWORD}@localhost/simulation2`;
+const connectionString = `postgres://postgres:Archangel++@localhost/simulation2`;
 
 var app = express(); 
 var c = require('./controller')
@@ -25,7 +25,7 @@ massive(connectionString).then(db => {
 /* PROPERTY ENDPOINTS */
 
 app.post('/api/properties', c.createHomes)
-app.get('/api/properties/:id', c.getHomes)
+app.get('/api/properties/', c.getHomes)
 app.delete('/api/properties/:id', c.deleteHomes)
 // app.get('/api/properties/filter', c.filterHomes)
 
